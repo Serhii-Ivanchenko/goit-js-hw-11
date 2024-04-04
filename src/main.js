@@ -1,5 +1,5 @@
-// import SimpleLightbox from 'simplelightbox';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // import iziToast from 'izitoast';
 // import 'izitoast/dist/css/iziToast.min.css';
@@ -80,3 +80,9 @@ function createMarkUp(arr) {
     )
     .join('');
 }
+
+const photosGallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  overlayOpacity: 0.8,
+});

@@ -26,12 +26,14 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding-top: 36px;
 }
 
 .search-form {
   display: flex;
+  justify-content: center;
   gap: 8px;
 }
 
@@ -79,9 +81,22 @@
   outline: none;
 }
 
-.gallery {}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1128px;
+  gap: 24px;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
 
-.gallery-item {}
+  list-style: none;
+}
+
+.gallery-item {
+  width: calc((100% - 48px)/3);
+
+}
 
 .thumb {}
 
@@ -94,3 +109,37 @@
 .description-items {}
 
 .accent {}
+
+
+
+.gallery-link {
+  cursor: pointer;
+}
+
+.gallery-link:hover .gallery-image {
+  transform: scale(1.04);
+}
+
+.gallery-image {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform 300ms ease-in-out;
+}
+
+.sl-overlay {
+  background: rgba(46, 47, 66) !important;
+}
+
+.sl-wrapper .sl-close {
+  color: #fff !important;
+}
+
+.sl-wrapper .sl-counter {
+  color: #fff !important;
+}
+
+.sl-wrapper .sl-navigation button {
+  color: #fff !important;
+}
