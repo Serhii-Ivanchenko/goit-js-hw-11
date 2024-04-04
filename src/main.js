@@ -1,13 +1,14 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// import iziToast from 'izitoast';
-// import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.js-search-form ');
 const btn = document.querySelector('.search-button');
 const input = document.querySelector('.search-input');
 const gallery = document.querySelector('ul.gallery');
+const loader = document.querySelector('.loader');
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '43222860-c920ce4922a75b9f5ac3c35c2';
 let searchInput = '';
@@ -16,6 +17,7 @@ form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
   event.preventDefault();
+  gallery.innerHTML = '';
 
   if (input.value.trim() === '') {
     return alert('Fill the field!');
@@ -23,14 +25,28 @@ function onFormSubmit(event) {
 
   searchInput = input.value;
 
+  loader.classList.toggle('visible');
+
   getData(searchInput)
     .then(data => {
-      gallery.insertAdjacentHTML('beforeend', createMarkUp(data.hits));
-      const photosGallery = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-        overlayOpacity: 0.8,
-      });
+      if (data.hits.length === 0) {
+        iziToast.error({
+          title: '',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topRight',
+        });
+        loader.classList.toggle('visible');
+      } else {
+        gallery.insertAdjacentHTML('beforeend', createMarkUp(data.hits));
+        const photosGallery = new SimpleLightbox('.gallery a', {
+          captionsData: 'alt',
+          captionDelay: 250,
+          overlayOpacity: 0.8,
+        });
+        photosGallery.refresh();
+        loader.classList.toggle('visible');
+      }
     })
     .catch(error => console.log(error))
     .finally(() => form.reset());
@@ -43,6 +59,7 @@ function getData(str) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
+    per_page: 40,
   });
 
   return fetch(`${BASE_URL}?${parameters}`).then(response => {
