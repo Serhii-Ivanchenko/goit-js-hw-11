@@ -4,12 +4,12 @@
   | default @import url()
   |============================
 */
+@import url('../../node_modules/modern-normalize/modern-normalize.css');
 @import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -22,4 +22,40 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 36px;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+}
+
+.label {}
+
+.search-input {
+  width: 272px;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #808080;
+}
+
+.search-button {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #4E75FF;
+  border: none;
+
+  color: #FFF;
+  font-weight: 500;
+  line-height: 1.5em;
+  letter-spacing: 0.64px;
 }
