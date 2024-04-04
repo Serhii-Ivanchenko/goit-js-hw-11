@@ -24,9 +24,14 @@ function onFormSubmit(event) {
   searchInput = input.value;
 
   getData(searchInput)
-    .then(data =>
-      gallery.insertAdjacentHTML('beforeend', createMarkUp(data.hits))
-    )
+    .then(data => {
+      gallery.insertAdjacentHTML('beforeend', createMarkUp(data.hits));
+      const photosGallery = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+        overlayOpacity: 0.8,
+      });
+    })
     .catch(error => console.log(error))
     .finally(() => form.reset());
 }
@@ -80,9 +85,3 @@ function createMarkUp(arr) {
     )
     .join('');
 }
-
-const photosGallery = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  overlayOpacity: 0.8,
-});
