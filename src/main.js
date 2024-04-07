@@ -10,6 +10,10 @@ import { form, input, gallery } from './js/refs.js';
 import { loaderShow } from './js/loader.js';
 
 let searchInput = '';
+const photosGallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 form.addEventListener('submit', onFormSubmit);
 
@@ -44,10 +48,7 @@ function onFormSubmit(event) {
         loaderShow();
       } else {
         gallery.insertAdjacentHTML('beforeend', createMarkUp(data.hits));
-        const photosGallery = new SimpleLightbox('.gallery a', {
-          captionsData: 'alt',
-          captionDelay: 250,
-        });
+        
         photosGallery.refresh();
         loaderShow();
       }
